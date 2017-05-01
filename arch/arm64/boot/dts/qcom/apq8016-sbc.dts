@@ -14,6 +14,7 @@
 /dts-v1/;
 
 #include "apq8016-sbc.dtsi"
+#include "d3-camera-mezzanine.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. APQ 8016 SBC";
