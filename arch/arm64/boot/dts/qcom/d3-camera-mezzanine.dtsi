@@ -30,7 +30,7 @@
 
 	camera_rear@78 {
 		// This port isn't really connected to I2C-6
-		// This is a hack until CCI driver is a full i2c driver.sudo media-ctl -v -d /dev/media0 -V '"ov5640 1-0078":0[fmt:UYVY2X8/1920x1080],"msm_csiphy0":0[fmt:UYVY2X8/1920x1080],"msm_csid0":0[fmt:UYVY2X8/1920x1080],"msm_ispif0":0[fmt:UYVY2X8/1920x1080],"msm_vfe0_rdi0":0[fmt:UYVY2X8/1920x1080]'
+		// This is a hack until CCI driver is a full i2c driver.
 		// The device connections listed are for port J3 - MIPI CSI0
 		compatible = "ovti,ov5640";
 		reg = <0x78>;
@@ -60,7 +60,7 @@
 	};
 
 	/* The camera driver requires all listed ports to have attached devices to bind them
-		   Uncomment this section and Camss->port@1 to enable the second camera
+	   Uncomment this section and Camss->port@1 to enable the second camera.
 	camera_front@74 {
 		// The device connections listed are for port J4 - MIPI CSI1
 		compatible = "ovti,ov5640";
