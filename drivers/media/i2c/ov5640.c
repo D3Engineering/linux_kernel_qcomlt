@@ -128,7 +128,6 @@ struct ov5640 {
 	bool hflip;   /* Initially set horizontal flip */
 	bool vflip;   /* Initially set vertical flip */
 	bool use_cci; /* indicate that CCI driver hack should be used */
-	struct v4l2_subdev *cci;
 };
 
 static inline struct ov5640 *to_ov5640(struct v4l2_subdev *sd)
@@ -1080,10 +1079,6 @@ static int ov5640_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 
 static const struct v4l2_subdev_core_ops ov5640_core_ops = {
 	.s_power = ov5640_s_power,
-	.g_ctrl = v4l2_subdev_g_ctrl,
-	.s_ctrl = v4l2_subdev_s_ctrl,
-	.queryctrl = v4l2_subdev_queryctrl,
-	.querymenu = v4l2_subdev_querymenu,
 };
 
 static const struct v4l2_subdev_video_ops ov5640_video_ops = {
@@ -1267,11 +1262,11 @@ static int ov5640_probe(struct i2c_client *client,
 
 	ov5640->sd.internal_ops = &ov5640_subdev_internal_ops;
 	ov5640->sd.dev = &client->dev;
-
+	ov5640->sd.entity.function = MEDIA_ENT_F_CAM_SENSOR;
 	ov5640->pad.flags = MEDIA_PAD_FL_SOURCE;
-	ov5640->sd.entity.type = MEDIA_ENT_T_V4L2_SUBDEV_SENSOR;
 
-	ret = media_entity_init(&ov5640->sd.entity, 1, &ov5640->pad, 0);
+
+	ret = media_entity_pads_init(&ov5640->sd.entity, 1, &ov5640->pad);
 	if (ret < 0) {
 		dev_err(dev, "could not register media entity\n");
 		goto free_ctrl;
