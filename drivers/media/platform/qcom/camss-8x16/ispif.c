@@ -1082,6 +1082,7 @@ int msm_ispif_register_entities(struct ispif_device *ispif,
 		pads[MSM_ISPIF_PAD_SRC].flags = MEDIA_PAD_FL_SOURCE;
 
 		sd->entity.ops = &ispif_media_ops;
+		sd->entity.function = MEDIA_ENT_F_IO_V4L;
 		ret = media_entity_pads_init(&sd->entity, MSM_ISPIF_PADS_NUM,
 					     pads);
 		if (ret < 0) {

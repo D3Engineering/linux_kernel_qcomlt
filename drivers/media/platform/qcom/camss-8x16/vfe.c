@@ -2372,6 +2372,7 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
 		pads[MSM_VFE_PAD_SRC].flags = MEDIA_PAD_FL_SOURCE;
 
 		sd->entity.ops = &vfe_media_ops;
+		sd->entity.function = MEDIA_ENT_F_IO_V4L;
 		ret = media_entity_pads_init(&sd->entity, MSM_VFE_PADS_NUM,
 					     pads);
 		if (ret < 0) {
